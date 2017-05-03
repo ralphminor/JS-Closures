@@ -147,10 +147,12 @@ function motivation(firstname, lastname) {
   var welcomeText = 'You\'re doing awesome, keep it up ';
 
   // code message function here.
-
+function message () {
+  return welcomeText + firstname + ' ' + lastname + '.';
+}
 
   //Uncommment this to return the value of your invoked message function
-  //return message();
+  return message();
 
 }
 
@@ -189,7 +191,11 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
-  };
+    publicMethod: () => {
+     return privateMethod();
+    }
+
+  }
 
 })();
 
@@ -208,7 +214,15 @@ var secondLevelFriends = ["Anne", "Harry", "Quinton"];
 var allUsers = ["Tom", "Dick", "Harry", "Anne", "Quinton", "Katie", "Mary"];
 
 function findPotentialFriends(existingFriends) {
-
+  return (friendToCheck) => {
+    let result = true;
+    existingFriends.forEach((e) => {
+      if (e === friendToCheck) {
+        result = false;
+      }
+    })
+    return result;
+  }
 }
 
 var isNotAFriend = findPotentialFriends( friends );
@@ -223,8 +237,10 @@ var isNotAFriend = findPotentialFriends( friends );
 method, find all potential second level friends as well as potential friends
 from allUsers. */
 
-var potentialSecondLevelFriends = "?";
-var allPotentialFriends = "?";
+var potentialSecondLevelFriends = Array.filter((potentialSecondLevelFriends, friend) {
+  return isNotAFriend(friend);
+})
+//var allPotentialFriends = "?";
 
 
 /******************************************************************************\
